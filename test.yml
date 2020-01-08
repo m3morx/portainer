@@ -7,19 +7,12 @@ volumes:
 
 services:
     
-    proxy:
-    image: jwilder/nginx-proxy:alpine
+  proxy:
+    image: jwilder/nginx-proxy:latest
     container_name: nextcloud-proxy
     ports:
       - 80:80
       - 443:443
-    volumes:
-      - proxy:/etc/nginx/conf.d:rw
-      - proxy:/etc/nginx/vhost.d:rw
-      - proxy:/usr/share/nginx/html:rw
-      - proxy:/etc/nginx/certs:ro
-      - proxy:/etc/localtime:ro
-      - proxy:/tmp/docker.sock:ro
     restart: always
     
   db:
