@@ -3,6 +3,7 @@ version: '2'
 volumes:
   nextcloud:
   db:
+  proxy:
 
 services:
     
@@ -13,13 +14,13 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./proxy/conf.d:/etc/nginx/conf.d:rw
-      - ./proxy/vhost.d:/etc/nginx/vhost.d:rw
-      - ./proxy/html:/usr/share/nginx/html:rw
-      - ./proxy/certs:/etc/nginx/certs:ro
-      - /etc/localtime:/etc/localtime:ro
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    restart: unless-stopped
+      - proxy:/etc/nginx/conf.d:rw
+      - proxy:/etc/nginx/vhost.d:rw
+      - proxy:/usr/share/nginx/html:rw
+      - proxy:/etc/nginx/certs:ro
+      - proxy:/etc/localtime:ro
+      - proxy:/tmp/docker.sock:ro
+    restart: always
     
   db:
     image: mariadb
