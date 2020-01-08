@@ -8,8 +8,6 @@ services:
 
 proxy:
     image: jwilder/nginx-proxy:alpine
-    labels:
-      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
     container_name: nextcloud-proxy
     networks:
       - nextcloud_network
@@ -23,7 +21,7 @@ proxy:
       - ./proxy/certs:/etc/nginx/certs:ro
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
-    restart: unless-stopped
+    restart: always
     
   db:
     image: mariadb
