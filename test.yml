@@ -5,12 +5,10 @@ volumes:
   db:
 
 services:
-
-proxy:
+    
+    proxy:
     image: jwilder/nginx-proxy:alpine
     container_name: nextcloud-proxy
-    networks:
-      - nextcloud_network
     ports:
       - 80:80
       - 443:443
@@ -21,7 +19,7 @@ proxy:
       - ./proxy/certs:/etc/nginx/certs:ro
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
-    restart: always
+    restart: unless-stopped
     
   db:
     image: mariadb
