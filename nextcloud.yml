@@ -12,6 +12,8 @@ services:
     ports:
       - 80:80
       - 443:443
+    network:
+    - nextcloud-proxy
     volumes:
       - ./proxy/conf.d:/etc/nginx/conf.d:rw
       - ./proxy/vhost.d:/etc/nginx/vhost.d:rw
